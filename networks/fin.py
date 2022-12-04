@@ -9,8 +9,10 @@ from networks.fin_modules import SpatialFourierCNN, SpatialFourierCNNGroup
 
 class FourierImagerNetwork(keras.Model):
 
-    def __init__(self, arch, in_shape, out_shape, name="fin"):
+    def __init__(self, arch, in_shape, out_shape, seed=0, name="fin"):
         super(FourierImagerNetwork, self).__init__()
+        self.seed = seed
+        keras.utils.set_random_seed(self.seed)
 
         self.arch = arch
         self.in_shape = in_shape

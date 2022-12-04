@@ -94,8 +94,8 @@ def get_data(name="cifar10", train_valid_split=[9, 1], center=True):
     return train_data, valid_data, test_data
 
 
-def get_network(architecture, info=True):
-    network = FourierImagerNetwork(architecture, in_shape=[32, 32, 3], out_shape=[10])
+def get_network(architecture, seed=0, info=True):
+    network = FourierImagerNetwork(architecture, in_shape=[32, 32, 3], out_shape=[10], seed=seed)
     if info:
         network.info(width=100)
     return network
@@ -143,7 +143,7 @@ def main():
     architecture = get_architecture(
         network=arguments.network, spaf_type=arguments.type,
         long_skip=arguments.long_skip, dct=arguments.fourier)
-    network = get_network(architecture, info=True)
+    network = get_network(architecture, seed=arguments.seed, info=True)
 
     criterion = get_criterion()
     optimizer = get_optimizer(
